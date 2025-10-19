@@ -26,9 +26,9 @@ function Dashboard() {
 	const isLive = !statusLoading && !latestBlockLoading;
 
 	return (
-		<div className="min-h-screen bg-muted/50">
+		<div className="min-h-screen bg-muted/50 pb-8">
 			{/* Hero Section */}
-				<div className="container mx-auto px-6 py-4 max-w-7xl">
+				<div className="container mx-auto px-6 py-8 max-w-7xl">
 					<h1 className="text-4xl tracking-tight ">
 						Fermi Rollup Explorer
 					</h1>

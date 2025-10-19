@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useBlocks } from "@/hooks/useApi";
 import { Pagination } from "@/components/Pagination";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
@@ -36,9 +36,16 @@ function BlocksPage() {
 	const totalPages = data ? Math.ceil(data.total / limit) : 0;
 
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-background pb-8">
 			<div className="container mx-auto px-6 py-12 max-w-7xl">
 				<div className="mb-8">
+					<Link
+						to="/"
+						className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4 group"
+					>
+						<ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+						Back to Dashboard
+					</Link>
 					<h1 className="text-4xl font-bold mb-2 tracking-tight">All Blocks</h1>
 					<p className="text-lg text-muted-foreground">
 						Browse all blocks on the Fermi rollup
