@@ -16,7 +16,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 		<header className="sticky top-0 left-0 border-y bg-muted py-2 ">
 			<nav className="container flex items-center justify-between mx-auto px-6 max-w-7xl">
 				<div className="text-2xl font-bold">
-					FERMI
+					FERMI <span className="font-light ">Rollup</span>
 				</div>
 				<div className="flex items-center gap-4">
 					<a href="/" className="hover:underline">Home</a>

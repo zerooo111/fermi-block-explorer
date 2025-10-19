@@ -28,21 +28,21 @@ function Dashboard() {
 	return (
 		<div className="min-h-screen bg-muted/50 pb-8">
 			{/* Hero Section */}
-				<div className="container mx-auto px-6 py-8 max-w-7xl">
-					<h1 className="text-4xl tracking-tight ">
+				<div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-7xl">
+					<h1 className="text-3xl sm:text-4xl tracking-tight">
 						Fermi Rollup Explorer
 					</h1>
-					<p className="text-lg text-muted-foreground max-w-2xl">
+					<p className="text-base sm:text-lg text-muted-foreground max-w-2xl">
 						Real-time blockchain explorer for the Fermi rollup network
 					</p>
 				</div>
 
-			<div className="container mx-auto px-6 mb-8 max-w-7xl">
+			<div className="container mx-auto px-4 sm:px-6 mb-8 max-w-7xl">
 				{/* Main Content Container */}
 				<div className="border">
 					{/* Stats Grid */}
 					<div className="grid grid-cols-1 divide-y md:divide-x md:divide-y-0 md:grid-cols-2 gap-px">
-						<div className="p-6 bg-white">
+						<div className="p-4 sm:p-6 bg-white">
 							<div className="flex items-center justify-between mb-2">
 								<p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
 									Latest Block
@@ -61,25 +61,25 @@ function Dashboard() {
 									latestBlock?.block.height ?? status?.block_height ?? 0
 								}
 								format={{ notation: "standard" }}
-								className="text-4xl font-bold font-mono tabular-nums"
+								className="text-3xl sm:text-4xl font-bold font-mono tabular-nums"
 							/>
 						</div>
 
-						<div className="bg-background p-6">
+						<div className="bg-background p-4 sm:p-6">
 							<p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
 								Applied Batches
 							</p>
 							<NumberFlow
 								value={status?.applied_batches ?? 0}
 								format={{ notation: "standard" }}
-								className="text-4xl font-bold font-mono tabular-nums"
+								className="text-3xl sm:text-4xl font-bold font-mono tabular-nums"
 							/>
 						</div>
 					</div>
 
 					{/* Latest Blocks Table */}
 					<div className="border-t bg-muted">
-						<div className="px-6 py-4 border-b font-bold flex items-center justify-between">
+						<div className="px-4 sm:px-6 py-3 sm:py-4 border-b font-bold flex items-center justify-between">
 							<h2 className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
 								Latest Blocks
 							</h2>
@@ -97,22 +97,22 @@ function Dashboard() {
 								<table className="w-full">
 									<thead>
 										<tr className="border-b bg-muted/30">
-											<th className="text-left py-4 px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
+											<th className="text-left py-3 sm:py-4 px-3 sm:px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
 												Block
 											</th>
-											<th className="text-left py-4 px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
+											<th className="text-left py-3 sm:py-4 px-3 sm:px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
 												Time
 											</th>
-											<th className="text-left py-4 px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
+											<th className="text-left py-3 sm:py-4 px-3 sm:px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
 												Txs
 											</th>
-											<th className="text-left py-4 px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
+											<th className="text-left py-3 sm:py-4 px-3 sm:px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
 												Orders
 											</th>
-											<th className="text-left py-4 px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
+											<th className="text-left py-3 sm:py-4 px-3 sm:px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
 												Cancels
 											</th>
-											<th className="text-right py-4 px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
+											<th className="text-right py-3 sm:py-4 px-3 sm:px-6 text-xs font-mono text-muted-foreground uppercase tracking-wider">
 												State Root
 											</th>
 										</tr>
@@ -127,19 +127,19 @@ function Dashboard() {
 													key={block.height}
 													className="border-b last:border-0 hover:bg-muted/5 transition-colors"
 												>
-													<td className="py-4 px-6">
+													<td className="py-3 sm:py-4 px-3 sm:px-6">
 														<Link
 															to="/blocks/$height"
 															params={{ height: block.height.toString() }}
-															className="font-mono font-bold text-primary hover:underline inline-flex items-center gap-2 group/link"
+															className="font-mono font-bold text-sm sm:text-base text-primary hover:underline inline-flex items-center gap-2 group/link"
 														>
 															#{block.height.toLocaleString()}
 															<ArrowRight className="h-3 w-3 opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all" />
 														</Link>
 													</td>
-													<td className="py-4 px-6">
+													<td className="py-3 sm:py-4 px-3 sm:px-6">
 														<div className="space-y-1">
-															<p className="text-sm font-mono text-foreground">
+															<p className="text-xs sm:text-sm font-mono text-foreground">
 																{formatTimestamp(block.produced_at)}
 															</p>
 															<p className="text-xs text-muted-foreground">
@@ -147,23 +147,23 @@ function Dashboard() {
 															</p>
 														</div>
 													</td>
-													<td className="py-4 px-6">
-														<span className="font-mono font-semibold tabular-nums">
+													<td className="py-3 sm:py-4 px-3 sm:px-6">
+														<span className="font-mono text-sm font-semibold tabular-nums">
 															{block.transaction_ids.length}
 														</span>
 													</td>
-													<td className="py-4 px-6">
-														<span className="font-mono font-semibold tabular-nums">
+													<td className="py-3 sm:py-4 px-3 sm:px-6">
+														<span className="font-mono text-sm font-semibold tabular-nums">
 															{block.total_orders}
 														</span>
 													</td>
-													<td className="py-4 px-6">
-														<span className="font-mono font-semibold tabular-nums">
+													<td className="py-3 sm:py-4 px-3 sm:px-6">
+														<span className="font-mono text-sm font-semibold tabular-nums">
 															{block.total_cancels}
 														</span>
 													</td>
-													<td className="py-4 px-6 text-right">
-														<span className="font-mono text-sm text-muted-foreground">
+													<td className="py-3 sm:py-4 px-3 sm:px-6 text-right">
+														<span className="font-mono text-xs sm:text-sm text-muted-foreground">
 															{truncateAddress(stateRootHex, 8, 8)}
 														</span>
 													</td>
@@ -174,7 +174,7 @@ function Dashboard() {
 								</table>
 							</div>
 						) : (
-							<div className="p-6">
+							<div className="p-4 sm:p-6">
 								<ErrorMessage message="No blocks found" />
 							</div>
 						)}
@@ -182,11 +182,11 @@ function Dashboard() {
 
 					{/* State Root Display */}
 					{status?.state_root && (
-						<div className="border-t p-6">
+						<div className="border-t p-4 sm:p-6">
 							<h2 className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-3">
 								Current State Root
 							</h2>
-							<p className="font-mono text-sm break-all text-foreground/80">
+							<p className="font-mono text-xs sm:text-sm break-all text-foreground/80">
 								{status.state_root
 									.map((b) => b.toString(16).padStart(2, "0"))
 									.join("")}
