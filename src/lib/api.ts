@@ -1,10 +1,18 @@
 // API Client for Fermi Block Explorer
 
-import type { Block } from "@/types/api";
+import type {
+	NodeStatus,
+	MarketsResponse,
+	BlockWithDetails,
+	BlocksListResponse,
+	Transaction,
+	EventsResponse,
+	Block,
+} from "@/types/api";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://44.194.22.128:8080";
 
-export const WS_BASE = import.meta.env.VITE_WS_BASE || "ws://localhost:8080";
+export const WS_BASE = import.meta.env.VITE_WS_BASE || "ws://44.194.22.128:8080";
 
 async function fetchAPI<T>(endpoint: string): Promise<T> {
 	const response = await fetch(`${API_BASE}${endpoint}`);
@@ -20,11 +28,14 @@ async function fetchAPI<T>(endpoint: string): Promise<T> {
 }
 
 export const api = {
-	getStatus: () => fetchAPI("/status"),
-	getMarkets: () => fetchAPI("/markets"),
-	getLatestBlock: () => fetchAPI("/blocks/latest"),
-	getBlock: (height: number) => fetchAPI(`/blocks/${height}`),
-	getBlocks: async (limit = 20, offset = 0) => {
+	getStatus: (): Promise<NodeStatus> => fetchAPI<NodeStatus>("/status"),
+	getMarkets: (): Promise<MarketsResponse> =>
+		fetchAPI<MarketsResponse>("/markets"),
+	getLatestBlock: (): Promise<BlockWithDetails> =>
+		fetchAPI<BlockWithDetails>("/blocks/latest"),
+	getBlock: (height: number): Promise<BlockWithDetails> =>
+		fetchAPI<BlockWithDetails>(`/blocks/${height}`),
+	getBlocks: async (limit = 20, offset = 0): Promise<BlocksListResponse> => {
 		const blocks = await fetchAPI<Block[]>(
 			`/blocks?limit=${limit}&offset=${offset}`,
 		);
@@ -36,8 +47,13 @@ export const api = {
 			offset,
 		};
 	},
-	getTransaction: (id: string) => fetchAPI(`/transactions/${id}`),
-	getEvents: (marketId?: string, limit = 20, offset = 0) => {
+	getTransaction: (id: string): Promise<Transaction> =>
+		fetchAPI<Transaction>(`/transactions/${id}`),
+	getEvents: (
+		marketId?: string,
+		limit = 20,
+		offset = 0,
+	): Promise<EventsResponse> => {
 		const params = new URLSearchParams({
 			limit: limit.toString(),
 			offset: offset.toString(),
@@ -45,6 +61,6 @@ export const api = {
 		if (marketId) {
 			params.append("market_id", marketId);
 		}
-		return fetchAPI(`/events?${params.toString()}`);
+		return fetchAPI<EventsResponse>(`/events?${params.toString()}`);
 	},
 };
