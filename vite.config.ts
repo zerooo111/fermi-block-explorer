@@ -18,9 +18,19 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['@number-flow/react'],
+    exclude: ['@number-flow/react'],
   },
   build: {
+    target: 'esnext',
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('number-flow')) {
+            return 'number-flow';
+          }
+        },
+      },
+    },
     commonjsOptions: {
       transformMixedEsModules: true,
     },
