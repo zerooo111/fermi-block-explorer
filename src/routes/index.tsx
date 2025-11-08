@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import NumberFlow from "@number-flow/react";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { useBlocks, useLatestBlock, useStatus } from "@/hooks/useApi";
@@ -56,7 +56,7 @@ function Dashboard() {
 									</span>
 								</div>
 							</div>
-							<NumberFlow
+							<AnimatedNumber
 								value={
 									latestBlock?.block.height ?? status?.block_height ?? 0
 								}
@@ -69,7 +69,7 @@ function Dashboard() {
 							<p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
 								Applied Batches
 							</p>
-							<NumberFlow
+							<AnimatedNumber
 								value={status?.applied_batches ?? 0}
 								format={{ notation: "standard" }}
 								className="text-3xl sm:text-4xl font-bold font-mono tabular-nums"
