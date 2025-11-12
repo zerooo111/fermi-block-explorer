@@ -9,12 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RollupRouteImport } from './routes/rollup'
+import { Route as ContinuumRouteImport } from './routes/continuum'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlocksIndexRouteImport } from './routes/blocks.index'
 import { Route as TransactionsIdRouteImport } from './routes/transactions.$id'
 import { Route as BlocksHeightRouteImport } from './routes/blocks.$height'
 import { Route as AddressPubkeyRouteImport } from './routes/address.$pubkey'
 
+const RollupRoute = RollupRouteImport.update({
+  id: '/rollup',
+  path: '/rollup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContinuumRoute = ContinuumRouteImport.update({
+  id: '/continuum',
+  path: '/continuum',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,6 +55,8 @@ const AddressPubkeyRoute = AddressPubkeyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/continuum': typeof ContinuumRoute
+  '/rollup': typeof RollupRoute
   '/address/$pubkey': typeof AddressPubkeyRoute
   '/blocks/$height': typeof BlocksHeightRoute
   '/transactions/$id': typeof TransactionsIdRoute
@@ -50,6 +64,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/continuum': typeof ContinuumRoute
+  '/rollup': typeof RollupRoute
   '/address/$pubkey': typeof AddressPubkeyRoute
   '/blocks/$height': typeof BlocksHeightRoute
   '/transactions/$id': typeof TransactionsIdRoute
@@ -58,6 +74,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/continuum': typeof ContinuumRoute
+  '/rollup': typeof RollupRoute
   '/address/$pubkey': typeof AddressPubkeyRoute
   '/blocks/$height': typeof BlocksHeightRoute
   '/transactions/$id': typeof TransactionsIdRoute
@@ -67,6 +85,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/continuum'
+    | '/rollup'
     | '/address/$pubkey'
     | '/blocks/$height'
     | '/transactions/$id'
@@ -74,6 +94,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/continuum'
+    | '/rollup'
     | '/address/$pubkey'
     | '/blocks/$height'
     | '/transactions/$id'
@@ -81,6 +103,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/continuum'
+    | '/rollup'
     | '/address/$pubkey'
     | '/blocks/$height'
     | '/transactions/$id'
@@ -89,6 +113,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContinuumRoute: typeof ContinuumRoute
+  RollupRoute: typeof RollupRoute
   AddressPubkeyRoute: typeof AddressPubkeyRoute
   BlocksHeightRoute: typeof BlocksHeightRoute
   TransactionsIdRoute: typeof TransactionsIdRoute
@@ -97,6 +123,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/rollup': {
+      id: '/rollup'
+      path: '/rollup'
+      fullPath: '/rollup'
+      preLoaderRoute: typeof RollupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/continuum': {
+      id: '/continuum'
+      path: '/continuum'
+      fullPath: '/continuum'
+      preLoaderRoute: typeof ContinuumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -137,6 +177,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContinuumRoute: ContinuumRoute,
+  RollupRoute: RollupRoute,
   AddressPubkeyRoute: AddressPubkeyRoute,
   BlocksHeightRoute: BlocksHeightRoute,
   TransactionsIdRoute: TransactionsIdRoute,

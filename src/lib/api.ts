@@ -10,9 +10,9 @@ import type {
 	Block,
 } from "@/types/api";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://44.194.22.128:8080";
+const API_BASE = import.meta.env.VITE_API_BASE ;
 
-export const WS_BASE = import.meta.env.VITE_WS_BASE || "ws://44.194.22.128:8080";
+export const WS_BASE = import.meta.env.VITE_WS_BASE ;
 
 async function fetchAPI<T>(endpoint: string): Promise<T> {
 	const response = await fetch(`${API_BASE}${endpoint}`);
