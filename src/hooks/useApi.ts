@@ -1,7 +1,7 @@
 // React Query hooks for API integration
 
 import { useQuery } from "@tanstack/react-query";
-import { api } from "@/lib/api";
+import { rollup_api } from "@/lib/api";
 import type {
 	NodeStatus,
 	MarketsResponse,
@@ -15,7 +15,7 @@ import type {
 export function useStatus() {
 	return useQuery<NodeStatus>({
 		queryKey: ["status"],
-		queryFn: () => api.getStatus(),
+		queryFn: () => rollup_api.getStatus(),
 		refetchInterval: 5000, // Poll every 5 seconds
 	});
 }
@@ -24,7 +24,7 @@ export function useStatus() {
 export function useMarkets() {
 	return useQuery<MarketsResponse>({
 		queryKey: ["markets"],
-		queryFn: () => api.getMarkets(),
+		queryFn: () => rollup_api.getMarkets(),
 		staleTime: 5 * 60 * 1000, // Cache for 5 minutes
 	});
 }
@@ -33,7 +33,7 @@ export function useMarkets() {
 export function useLatestBlock() {
 	return useQuery<BlockWithDetails>({
 		queryKey: ["blocks", "latest"],
-		queryFn: () => api.getLatestBlock(),
+		queryFn: () => rollup_api.getLatestBlock(),
 		refetchInterval: 1000, // Poll every second for real-time feel
 	});
 }
@@ -46,7 +46,7 @@ export function useBlock(height: number | undefined) {
 			if (height === undefined) {
 				throw new Error("Block height is required");
 			}
-			return api.getBlock(height);
+			return rollup_api.getBlock(height);
 		},
 		enabled: height !== undefined,
 	});
@@ -56,7 +56,7 @@ export function useBlock(height: number | undefined) {
 export function useBlocks(limit = 20, offset = 0) {
 	return useQuery<BlocksListResponse>({
 		queryKey: ["blocks", { limit, offset }],
-		queryFn: () => api.getBlocks(limit, offset),
+		queryFn: () => rollup_api.getBlocks(limit, offset),
 		refetchInterval: 3000, // Poll every 3 seconds for block list updates
 	});
 }
@@ -69,7 +69,7 @@ export function useTransaction(id: string | undefined) {
 			if (!id) {
 				throw new Error("Transaction ID is required");
 			}
-			return api.getTransaction(id);
+			return rollup_api.getTransaction(id);
 		},
 		enabled: !!id,
 		retry: (failureCount, error) => {
@@ -84,6 +84,6 @@ export function useTransaction(id: string | undefined) {
 export function useEvents(marketId?: string, limit = 20, offset = 0) {
 	return useQuery<EventsResponse>({
 		queryKey: ["events", { marketId, limit, offset }],
-		queryFn: () => api.getEvents(marketId, limit, offset),
+		queryFn: () => rollup_api.getEvents(marketId, limit, offset),
 	});
 }

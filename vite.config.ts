@@ -6,7 +6,7 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import { resolve } from 'node:path'
 import type { Plugin } from 'vite'
 
-// Custom plugin to resolve @ imports from fermi-explorer-fronend
+// Custom plugin to resolve @ imports from continum-files
 function continuumAliasResolver(): Plugin {
   return {
     name: 'continuum-alias-resolver',
@@ -17,10 +17,10 @@ function continuumAliasResolver(): Plugin {
         // Normalize paths for cross-platform compatibility
         const normalizedImporter = importer.replace(/\\/g, '/')
 
-        // Check if the importing file is from fermi-explorer-fronend
-        if (normalizedImporter.includes('fermi-explorer-fronend')) {
-          // Resolve @ to fermi-explorer-fronend/src
-          const continuumSrcPath = resolve(__dirname, '../fermi-explorer-fronend/src')
+        // Check if the importing file is from continum-files
+        if (normalizedImporter.includes('continum-files')) {
+          // Resolve @ to continum-files/src
+          const continuumSrcPath = resolve(__dirname, './continum-files/src')
           const resolvedPath = source.replace('@/', continuumSrcPath + '/')
           return resolvedPath
         }

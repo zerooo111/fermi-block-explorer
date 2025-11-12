@@ -1,6 +1,6 @@
-import { RecentTicks } from "../../../fermi-explorer-fronend/src/components/RecentTicks";
-import { RecentTransactions } from "../../../fermi-explorer-fronend/src/components/RecentTransactions";
-import { ChainStatus } from "../../../fermi-explorer-fronend/src/components/ChainStatus";
+import { RecentTicks } from "../../continum-files/src/components/RecentTicks";
+import { RecentTransactions } from "../../continum-files/src/components/RecentTransactions";
+import { ChainStatus } from "../../continum-files/src/components/ChainStatus";
 
 export default function Homepage() {
   return (
